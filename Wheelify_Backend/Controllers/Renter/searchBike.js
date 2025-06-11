@@ -38,6 +38,7 @@ const searchAvailableBikes = async (req, res) => {
       Owner: { $ne: new mongoose.Types.ObjectId(currentUserId) },
     });
 
+    // ❗ Do NOT return 404. Always return 200 with empty array
     return res.status(200).json({ success: true, bikes: availableBikes });
   } catch (error) {
     console.error(error);

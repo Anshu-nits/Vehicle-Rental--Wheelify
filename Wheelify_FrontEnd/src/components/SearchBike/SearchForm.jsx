@@ -23,11 +23,14 @@ const SearchForm = () => {
 
     try {
       const { data } = await axios.post("/api/v1/search-available-bikes", formData);
-      if (data.success) {
-        navigate("/available-bike", { state: { bikes: data.bikes, form: formData } });
-      } else {
-        alert(data.message);
-      }
+
+      // Always navigate to available-bike regardless of bike count
+      navigate("/available-bike", {
+        state: {
+          bikes: data?.bikes || [],
+          form: formData,
+        },
+      });
     } catch (err) {
       console.error("Search error:", err);
       alert("Something went wrong. Please try again.");
@@ -110,4 +113,3 @@ const SearchForm = () => {
 };
 
 export default SearchForm;
-
