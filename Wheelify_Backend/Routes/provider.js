@@ -16,6 +16,7 @@ router.post(
     { name: "thumbnail", maxCount: 1 }, // Field for the vehicle thumbnail image
     { name: "ownershipProof", maxCount: 1 }, // Field for the ownership proof image
   ]),
+  auth,
   registerBike
 );
 
