@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/v1': {
-        target: 'http://localhost:4000',
+        target: 'https://vehicle-rental-wheelify-backend.onrender.com',
         changeOrigin: true,
         secure: false,
       },

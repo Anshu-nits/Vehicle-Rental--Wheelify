@@ -9,7 +9,7 @@ const MyRegisteredBikes = () => {
   useEffect(() => {
     const fetchBikes = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/v1/my-bikes", {
+        const res = await axios.get("/api/v1/my-bikes", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
