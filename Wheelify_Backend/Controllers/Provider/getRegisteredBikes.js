@@ -13,8 +13,8 @@ const getRegisteredBikes = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error fetching bikes",
-      error: error.message,
+      message: "Error in fetching bikes",
+      error: error?.message,
     });
   }
 };
