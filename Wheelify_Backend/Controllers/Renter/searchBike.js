@@ -11,7 +11,7 @@ const searchAvailableBikes = async (req, res) => {
 
     const date = new Date(desiredDate);
     if (isNaN(date)) {
-      return res.status(400).json({ success: false, message: "Invalid date format." });
+      return res.status(400).json({ success: false, message: "Invalid Date format." });
     }
 
     const [fromHour, fromMin] = desiredTimeFrom.split(":").map(Number);
