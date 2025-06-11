@@ -9,11 +9,13 @@ const MyRegisteredBikes = () => {
   useEffect(() => {
     const fetchBikes = async () => {
       try {
-        const res = await axios.get("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/my-bikes", {
+        const res = await axios.get("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/my-bikes", 
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
+        }
+      );
         setBikes(res.data.data);
       } catch (error) {
         console.error("Error fetching bikes:", error);

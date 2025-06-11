@@ -22,7 +22,7 @@ router.post(
 
 router.get("/my-bikes", auth, getRegisteredBikes);
 router.post("/unregister-bike", auth, unregisterBike);
-router.post("/provide-bike", auth, provideBike);
+router.post("/provide-bike", auth, provideBike);        
 router.post("/remove-provided-bike", auth, removeProvidedBike);
 
 export default router;

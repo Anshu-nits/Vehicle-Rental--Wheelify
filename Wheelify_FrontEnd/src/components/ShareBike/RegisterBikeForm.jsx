@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { AuthContext } from "../AuthContext/AuthContext";
 
 const RegisterBikeForm = () => {
   const [showForm, setShowForm] = useState(false);
-
+   const { token } = useContext(AuthContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,9 +22,8 @@ const RegisterBikeForm = () => {
         formData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
           },
-          withCredentials: true, 
         }
       );
 
