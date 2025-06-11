@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext/AuthContext";
 
 const SearchForm = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const SearchForm = () => {
     desiredTimeTill: "",
     location: "",
   });
+  const { token } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -22,7 +24,14 @@ const SearchForm = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/search-available-bikes", formData);
+      const { data } = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/search-available-bikes", 
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       // Always navigate to available-bike regardless of bike count
       navigate("/available-bike", {
