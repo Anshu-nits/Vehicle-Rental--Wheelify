@@ -22,7 +22,7 @@ const SearchForm = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("/api/v1/search-available-bikes", formData);
+      const { data } = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/search-available-bikes", formData);
 
       // Always navigate to available-bike regardless of bike count
       navigate("/available-bike", {

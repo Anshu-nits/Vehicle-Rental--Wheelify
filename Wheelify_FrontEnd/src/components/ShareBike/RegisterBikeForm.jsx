@@ -17,7 +17,7 @@ const RegisterBikeForm = () => {
 
     try {
       const response = await axios.post(
-        '/api/v1/register-bike', 
+        'https://vehicle-rental-wheelify-backend.onrender.com/api/v1/register-bike', 
         formData,
         {
           headers: {

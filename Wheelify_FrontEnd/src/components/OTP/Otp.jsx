@@ -13,7 +13,7 @@ const OtpPage = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post('/api/v1/otp-verification-and-user-creation', {
+      const response = await axios.post('https://vehicle-rental-wheelify-backend.onrender.com/api/v1/otp-verification-and-user-creation', {
         ...userData,
         otp,
       });
@@ -33,7 +33,7 @@ const OtpPage = () => {
 
   const handleResendOTP = async () => {
     try {
-      const response = await axios.post('/api/v1/generate-otp', {
+      const response = await axios.post('https://vehicle-rental-wheelify-backend.onrender.com/api/v1/generate-otp', {
         name: userData.name,
         email: userData.email,
         password: userData.password,

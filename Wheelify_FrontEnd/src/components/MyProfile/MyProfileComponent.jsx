@@ -22,7 +22,7 @@ const MyProfileComponent = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          "/api/v1/get-profile-details",
+          "https://vehicle-rental-wheelify-backend.onrender.com/api/v1/get-profile-details",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ const MyProfileComponent = () => {
   const handleSave = async () => {
     try {
       await axios.put(
-        "/api/v1/update-profile",
+        "https://vehicle-rental-wheelify-backend.onrender.com/api/v1/update-profile",
         formData,
         {
           headers: {

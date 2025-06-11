@@ -106,7 +106,6 @@ const BikeDetails = () => {
           <label className="block text-sm font-medium text-gray-700 mb-1">Return Date</label>
           <input type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} className="w-full border rounded p-2" />
         </div>
-
         {/* Time Pickers */}
         <div className="mt-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Pickup Time</label>

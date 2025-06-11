@@ -82,7 +82,7 @@ const SignupForm = () => {
 
     try {
       // Call the generate OTP API
-      const response = await axios.post('/api/v1/generate-otp', {
+      const response = await axios.post('https://vehicle-rental-wheelify-backend.onrender.com/api/v1/generate-otp', {
         email: formData.email,
       });
 
