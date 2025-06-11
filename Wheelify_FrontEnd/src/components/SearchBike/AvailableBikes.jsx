@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {
-  FaCalendarAlt,
-  FaClock,
-  FaEdit,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
+import { FaCalendarAlt, FaClock, FaEdit, FaMapMarkerAlt } from "react-icons/fa";
 
 const AvailableBikes = () => {
   const locationState = useLocation().state;
@@ -19,7 +14,7 @@ const AvailableBikes = () => {
 
   const { bikes: initialBikes, form: initialForm } = locationState;
 
-  const [bikes, setBikes] = useState(initialBikes);
+  const [bikes, setBikes] = useState(initialBikes || []);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState(initialForm);
   const [loading, setLoading] = useState(false);
@@ -30,14 +25,10 @@ const AvailableBikes = () => {
   const handleUpdate = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.post("/api/bikes/search", formData);
+      const { data } = await axios.post("/api/v1/search-available-bikes", formData);
       setLoading(false);
-      if (data.success) {
-        setBikes(data.bikes);
-        setShowForm(false);
-      } else {
-        alert(data.message);
-      }
+      setBikes(data?.bikes || []);
+      setShowForm(false);
     } catch (err) {
       setLoading(false);
       console.error("Error re-searching:", err);
@@ -83,23 +74,21 @@ const AvailableBikes = () => {
         <div className="mb-10 border border-gray-200 shadow-md rounded-xl p-4 bg-gray-50">
           <h2 className="text-lg font-semibold mb-4">Modify Your Search</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-            {[
-              ["desiredDate", "Date", "date"],
+            {[["desiredDate", "Date", "date"],
               ["desiredTimeFrom", "Start Time", "time"],
               ["desiredTimeTill", "End Time", "time"],
-              ["location", "Location", "text"],
-            ].map(([name, label, type]) => (
-              <div key={name}>
-                <label className="text-sm font-medium mb-1 block">{label}</label>
-                <input
-                  type={type}
-                  name={name}
-                  value={formData[name]}
-                  onChange={handleChange}
-                  className="border rounded px-3 py-2 w-full"
-                />
-              </div>
-            ))}
+              ["location", "Location", "text"]].map(([name, label, type]) => (
+                <div key={name}>
+                  <label className="text-sm font-medium mb-1 block">{label}</label>
+                  <input
+                    type={type}
+                    name={name}
+                    value={formData[name]}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 w-full"
+                  />
+                </div>
+              ))}
           </div>
           <div className="flex gap-4">
             <button
@@ -121,14 +110,15 @@ const AvailableBikes = () => {
       <div className="mb-4">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold">
-            Found <strong>{bikes.length}</strong> bikes
+            Found <strong>{bikes.length}</strong> bike{bikes.length !== 1 && "s"}
           </h2>
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading ? (
             <p className="col-span-full text-center text-gray-500">Loading bikes...</p>
           ) : bikes.length === 0 ? (
-            <p className="col-span-full text-center text-gray-500">No bikes found.</p>
+            <p className="col-span-full text-center text-gray-500">No bikes found currently.</p>
           ) : (
             bikes.map((b) => (
               <div
@@ -162,4 +152,3 @@ const AvailableBikes = () => {
 };
 
 export default AvailableBikes;
-
