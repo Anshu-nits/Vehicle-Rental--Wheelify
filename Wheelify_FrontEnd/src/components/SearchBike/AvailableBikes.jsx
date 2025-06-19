@@ -10,7 +10,7 @@ import {
   FaSadTear,
 } from "react-icons/fa";
 import axios from "axios";
-import { AuthContext } from "../../AuthContext/AuthContext.JSX";
+import { AuthContext } from "../../AuthContext/AuthContext.jsx";
 
 const AvailableBikes = () => {
   const locationState = useLocation().state;
