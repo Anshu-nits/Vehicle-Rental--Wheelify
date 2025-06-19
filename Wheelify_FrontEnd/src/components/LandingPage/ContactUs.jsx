@@ -10,7 +10,6 @@ const ContactUs = () => {
     subject: '',
     message: '',
   });
-  const { token } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -18,18 +17,19 @@ const ContactUs = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
+  
+  const { token } = useContext(AuthContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/contact",
+      const res = await axios.post('https://wheelify-backend.onrender.com/api/v1/contact',
       formData,
       {
           headers: {
             Authorization: `Bearer ${token}`,
-          },
+           },
           withCredentials: true,
-      }); 
+       }); // change base URL if needed
       if (res.data.success) {
         alert('Thank you for reaching out! We will contact you soon.');
         setFormData({
