@@ -24,21 +24,19 @@ const SearchForm = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/search-bike",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-      // Always navigate to available-bike regardless of bike count
-      navigate("/available-bike", {
-        state: {
-          bikes: data?.bikes || [],
-          form: formData,
-        },
-      });
+      const { data } = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/search-available-bikes",
+              formData,
+              {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+              },
+      );
+      if (data.success) {
+        navigate("/available-bike", { state: { bikes: data.bikes, form: formData } });
+      } else {
+        alert(data.message);
+      }
     } catch (err) {
       console.error("Search error:", err);
       alert("Something went wrong. Please try again.");
