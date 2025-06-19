@@ -20,7 +20,15 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/contact", formData); // change base URL if needed
+     const res = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/contact",
+      formData,
+      {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+      }); 
       if (res.data.success) {
         alert('Thank you for reaching out! We will contact you soon.');
         setFormData({
