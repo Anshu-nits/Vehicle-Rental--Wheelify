@@ -10,7 +10,7 @@ import { addBikeRating } from "../Controllers/Renter/addBikeRating.js";
 
 const router = express.Router();
 
-router.post("/search-bike", auth, searchAvailableBikes);
+router.post("/search-available-bikes", auth, searchAvailableBikes);
 router.get("/get-bike-details", auth, getBikeDetails);
 router.post("/add-to-user-cart", auth, addToUserCart);
 router.post("/remove-from-user-cart", auth, removeFromUserCart);
