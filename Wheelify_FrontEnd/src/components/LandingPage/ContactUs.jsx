@@ -22,7 +22,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://wheelify-backend.onrender.com/api/v1/contact',
+      const res = await axios.post('https://vehicle-rental-wheelify-backend.onrender.com/api/v1/contact',
       formData,
       {
           headers: {
