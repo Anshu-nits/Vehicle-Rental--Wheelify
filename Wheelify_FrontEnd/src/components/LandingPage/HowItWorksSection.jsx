@@ -10,6 +10,7 @@ import {
 import { MdCalendarToday, MdOutlineCheckCircle } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
 import { BsPeopleFill } from "react-icons/bs";
+import { Link } from "react-router-dom"; // ✅ Keep this import
 
 const renterSteps = [
   {
@@ -125,9 +126,17 @@ const HowItWorks = () => {
           ))}
         </div>
 
-        <button className="mt-12 bg-green-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors">
+        {/* Get Started Button with Conditional Link and Color */}
+        <Link
+          to={activeUser === "renter" ? "/search-bike" : "/share-bike"}
+          className={`mt-12 inline-block ${
+            activeUser === "renter" ? "bg-green-500" : "bg-blue-500"
+          } text-white font-semibold py-3 px-6 rounded-lg hover:${
+            activeUser === "renter" ? "bg-green-600" : "bg-blue-600"
+          } transition-colors`}
+        >
           Get Started Today
-        </button>
+        </Link>
       </div>
     </section>
   );
