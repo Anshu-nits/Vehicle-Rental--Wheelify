@@ -3,9 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   FaUser,
   FaHistory,
-  FaHeart,
   FaCreditCard,
-  FaEdit,
   FaSignOutAlt,
   FaBook,
   FaUserCircle,
@@ -60,20 +58,14 @@ const ProfileDropdown = () => {
           <Link to="/profile" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
             <FaUser /> My Profile
           </Link>
-          <Link to="/registered-bikes" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
-            <FaHistory /> My Registered Bikes
+          <Link to="/my-bike" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
+            <FaHistory /> My Bikes
           </Link>
-          <Link to="/bookings" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
+          <Link to="/my-bookings" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
             <FaBook /> My Bookings
           </Link>
-          <Link to="/wishlist" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
-            <FaHeart /> Wishlist
-          </Link>
-          <Link to="/transactions" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
-            <FaCreditCard /> Transaction History
-          </Link>
-          <Link to="/edit-profile" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
-            <FaEdit /> Edit Profile
+          <Link to="/wallet" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
+            <FaCreditCard /> Wallet
           </Link>
           <button
             onClick={handleLogout}
@@ -94,9 +86,7 @@ export default ProfileDropdown;
 // import {
 //   FaUser,
 //   FaHistory,
-//   FaHeart,
 //   FaCreditCard,
-//   FaEdit,
 //   FaSignOutAlt,
 //   FaBook,
 //   FaUserCircle,
@@ -151,20 +141,14 @@ export default ProfileDropdown;
 //           <Link to="/profile" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
 //             <FaUser /> My Profile
 //           </Link>
-//           <Link to="/history" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
-//             <FaHistory /> History
+//           <Link to="/share-bike" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
+//             <FaHistory /> My Bikes
 //           </Link>
-//           <Link to="/bookings" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
+//           <Link to="/my-bookings" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
 //             <FaBook /> My Bookings
 //           </Link>
-//           <Link to="/wishlist" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
-//             <FaHeart /> Wishlist
-//           </Link>
 //           <Link to="/transactions" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
-//             <FaCreditCard /> Transaction History
-//           </Link>
-//           <Link to="/edit-profile" className="flex items-center gap-2 px-4 py-2 hover:bg-green-100">
-//             <FaEdit /> Edit Profile
+//             <FaCreditCard /> Wallet
 //           </Link>
 //           <button
 //             onClick={handleLogout}
@@ -179,4 +163,3 @@ export default ProfileDropdown;
 // };
 
 // export default ProfileDropdown;
-

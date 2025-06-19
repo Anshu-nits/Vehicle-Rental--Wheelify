@@ -9,6 +9,7 @@ const auth = async (req, res, next) => {
         const token = req.cookies.token 
                         || req.body.token 
                         || req.header("Authorization").replace("Bearer ", "");
+        console.log(token)                
 
         //if token missing, then return response
         if(!token) {
@@ -22,6 +23,7 @@ const auth = async (req, res, next) => {
         try{
             const decode =  jwt.verify(token, process.env.JWT_SECRET);
             console.log(decode);
+            console.log("verified")
             req.user = decode;
         }
         catch(err) {

@@ -1,63 +1,64 @@
 import User from "../../Models/User.js";
 import Bike from "../../Models/Bike.js";
+import Booking from "../../Models/Booking.js";
 
 const removeFromUserCart = async (req, res) => {
   try {
-    const { bikeId } = req.body;
+    const { bookingId } = req.body;
+    const userId = req.user?.id;
 
-    // Extract userId from the authenticated user
-    const userId = req.user.id;
-
-    // Validate input
-    if (!bikeId) {
+    if (!bookingId) {
       return res.status(400).json({
         success: false,
-        message: "Bike ID is required.",
+        message: "Booking ID is required.",
       });
     }
 
-    // Check if the user exists
     const user = await User.findById(userId);
     if (!user) {
+      return res.status(404).json({ success: false, message: "User not found." });
+    }
+
+    const booking = await Booking.findById(bookingId);
+    if (!booking) {
       return res.status(404).json({
         success: false,
-        message: "User not found.",
+        message: "Booking not found.",
       });
     }
 
-    // Check if the bike exists
-    const bike = await Bike.findById(bikeId);
-    if (!bike) {
-      return res.status(404).json({
+    if (booking.renter.toString() !== userId) {
+      return res.status(403).json({
         success: false,
-        message: "Bike not found.",
+        message: "You can only remove your own bookings.",
       });
     }
 
-    // Check if the bike is already in the cart
-    if (!user.cart.includes(bikeId)) {
-      return res.status(400).json({
-        success: false,
-        message: "Bike is not in your cart.",
-      });
+    // Remove booking from cart
+    user.cart = user.cart.filter(
+      cartItemId => cartItemId.toString() !== bookingId
+    );
+
+    // Restore bike status
+    const bike = await Bike.findById(booking.bike);
+    if (bike) {
+      bike.status = "provided for rent";
+      await bike.save();
     }
 
-    // Remove the bike from the user's cart
-    user.cart = user.cart.filter((bikeIdInCart) => bikeIdInCart.toString() !== bikeId.toString());
-
+    // Delete booking and save user
+    await Booking.findByIdAndDelete(bookingId);
     await user.save();
 
     return res.status(200).json({
       success: true,
-      message: "Bike successfully removed from your cart.",
-      cart: user.cart,
+      message: "Item removed from cart successfully.",
     });
   } catch (error) {
-    // Handle any errors
-    console.error(error);
-    res.status(500).json({
+    console.error("Remove from cart error:", error);
+    return res.status(500).json({
       success: false,
-      message: "Failed to remove bike from cart.",
+      message: "Failed to remove item from cart.",
       error: error.message,
     });
   }

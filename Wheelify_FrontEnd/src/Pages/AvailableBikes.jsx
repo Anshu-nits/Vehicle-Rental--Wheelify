@@ -8,4 +8,4 @@ function AvailableBikesPage() {
   );
 }
 
-export default AvailableBikesPage;          
+export default AvailableBikesPage;      

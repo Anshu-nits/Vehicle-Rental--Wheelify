@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
@@ -20,9 +22,9 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="hover:underline">Home</a></li>
-            <li><a href="#" className="hover:underline">Bikes</a></li>
-            <li><a href="#" className="hover:underline">Reviews</a></li>
-            <li><a href="#" className="hover:underline">How It Works</a></li>
+            <li><HashLink smooth to="/#reviews" className="hover:underline">Reviews</HashLink></li>
+            <li><HashLink smooth to="/#how-it-works" className="hover:underline">How It Works</HashLink></li>
+            <li><HashLink smooth to="/#contact-us" className="hover:underline">Contact</HashLink></li>
           </ul>
         </div>
 
@@ -46,7 +48,6 @@ const Footer = () => {
             <li className="flex items-center gap-2"><FaMapMarkerAlt /> 123 Bike Street, City, State</li>
           </ul>
         </div>
-
       </div>
 
       <div className="border-t border-green-700 mt-10 pt-4 text-center text-sm">

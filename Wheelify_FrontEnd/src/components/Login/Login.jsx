@@ -6,6 +6,7 @@ import { AuthContext } from '../../AuthContext/AuthContext.jsx';
 
 
 const LoginForm = () => {
+  const { token } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,9 +16,10 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://vehicle-rental-wheelify-backend.onrender.com/api/v1/login', { email, password }, {
-        withCredentials: true,
-      });
+      const response = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/login", { email, password }, {
+            headers: { Authorization: `Bearer ${token}` },
+            withCredentials: true,
+          });
 
       if (response.data.success) {
         setToken(response.data.token); // Save to context

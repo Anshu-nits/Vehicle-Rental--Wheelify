@@ -11,7 +11,6 @@ const SearchForm = () => {
     desiredTimeTill: "",
     location: "",
   });
-  const { token } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -20,18 +19,18 @@ const SearchForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const { token } = useContext(AuthContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/search-available-bikes", 
+      const { data } = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/search-bike",
         formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
+        });
 
       // Always navigate to available-bike regardless of bike count
       navigate("/available-bike", {
@@ -122,3 +121,5 @@ const SearchForm = () => {
 };
 
 export default SearchForm;
+
+

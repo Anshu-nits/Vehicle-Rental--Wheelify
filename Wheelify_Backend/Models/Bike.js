@@ -18,6 +18,16 @@ const bikeSchema = new mongoose.Schema({
   },
   status: {
     type: String,
+    enum: [
+      "not provided for rent",
+      "provided for rent",
+      "in cart",
+      "rented",
+      "picked up",
+      "cancelled",
+      "returned",
+    ],
+    default: "not provided for rent",
   },
   Owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -29,6 +39,9 @@ const bikeSchema = new mongoose.Schema({
   },
   img: {
     type: String,
+  },
+  rentPerHour: {
+    type: Number,
   },
   rentAmount: {
     type: Number,
@@ -50,9 +63,17 @@ const bikeSchema = new mongoose.Schema({
   },
   ratings: [
     {
-      user: {
+      userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        required: true,
+      },
+      bookingId: {
+        type: String, // This matches your booking's custom bookingId field
+        required: true,
+      },
+      username: {
+        type: String,
         required: true,
       },
       rating: {
