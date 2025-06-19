@@ -11,7 +11,7 @@ const ContactUs = () => {
     message: '',
   });
   const { token } = useContext(AuthContext);
-  
+
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -27,7 +27,6 @@ const ContactUs = () => {
       {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
           },
           withCredentials: true,
       }); 
