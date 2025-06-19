@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Phone, Mail } from 'lucide-react';
 import axios from 'axios';
+import { AuthContext } from "../../AuthContext/AuthContext.jsx";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,8 @@ const ContactUs = () => {
     subject: '',
     message: '',
   });
-
+  const { token } = useContext(AuthContext);
+  
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -20,7 +22,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     const res = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/contact",
+      const res = await axios.post("https://vehicle-rental-wheelify-backend.onrender.com/api/v1/contact",
       formData,
       {
           headers: {
