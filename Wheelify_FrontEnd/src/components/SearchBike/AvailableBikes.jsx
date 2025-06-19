@@ -40,11 +40,14 @@ const AvailableBikes = () => {
       const { data } = await axios.post(
         "https://vehicle-rental-wheelify-backend.onrender.com/api/v1/search-available-bikes",
         formData,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-            withCredentials: true,
-          }
-        );
+        {
+         headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
       setLoading(false);
       if (data.success) {
         setBikes(data.bikes || []); // Ensure bikes is always an array
@@ -325,6 +328,3 @@ const AvailableBikes = () => {
 };
 
 export default AvailableBikes;
-
-
- 
